@@ -3,13 +3,13 @@ atkinsMode = true;
 hexagonWidth = (213.2 + 0.4)/6; /*106.6*2; 213.2; 35.5*/
 fiddle = 0.2;
 depth = 30;
-height = 6;
+height = (atkinsMode ? 4 : 6);
 seaHeight = 1.5;
 
 // Image stuff
 dataFile = "./edgepicTEST1.dat";
 imageWidth = 1240;
-embossDepth = 0.5;
+embossDepth = (atkinsMode ? 0.8 : 0.5);
 
 /*
 cah
