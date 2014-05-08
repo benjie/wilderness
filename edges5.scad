@@ -1,13 +1,14 @@
+dietMode = false;
+atkinsMode = true;
 hexagonWidth = (213.2 + 0.4)/6; /*106.6*2; 213.2; 35.5*/
 fiddle = 0.2;
 depth = 30;
 height = 6;
 seaHeight = 1.5;
-dietMode = false;
 
 // Image stuff
-dataFile = "./edgepic2.dat";
-imageWidth = 620;
+dataFile = "./edgepicTEST1.dat";
+imageWidth = 1240;
 embossDepth = 0.5;
 
 /*
@@ -24,13 +25,13 @@ bobbleOffset = 0.6;
 bobbleTolerance = 1;
 
 innerWidth =  5 * hexagonWidth + 2 * ((2*hexagonEdge * cos(30)) - hexagonEdge / (2 * cos(30)));
-outerWidth = innerWidth + 2 * (tan(30) * depth);
+outerWidth = innerWidth + 2 * (tan(30) * depth) * (atkinsMode ? 0 : 1);
 imageScale = innerWidth/imageWidth;
 
 echo("InnerWidth: ", innerWidth);
 echo("OuterWidth: ", outerWidth);
 
-if (!dietMode) {
+if (!dietMode && !atkinsMode) {
 difference() {
 	translate([0, -outerWidth/2 / tan(30) + depth/2, seaHeight/2]) {
 		cylinder(h=seaHeight, r=outerWidth, center=true, $fn=2000);
@@ -44,8 +45,9 @@ difference() {
 
 translate([0, 0, height/2]) {
 difference() {
-	cube(size=[outerWidth,depth,height], center=true);
+	cube(size=[outerWidth,depth * (atkinsMode ? 0.7 : 1),height], center=true);
 
+if (!atkinsMode) {
 	translate([-outerWidth/2 - depth/2 * tan(30),0,0]) {
 		rotate(-60) {
 			cube(size=[outerWidth*2,depth,height+2*fiddle], center=true);
@@ -77,8 +79,8 @@ difference() {
 		}
 	}
 
-
-translate([0, depth/6, height/2+fiddle]) {
+}
+translate([0, (atkinsMode ? 0 : depth/6), height/2+fiddle]) {
     scale([imageScale, -imageScale, -1/256 * height * embossDepth]) {
         surface(file = dataFile, center=true);
     }
@@ -87,6 +89,7 @@ translate([0, depth/6, height/2+fiddle]) {
 
 }
 }
+if (!atkinsMode) {
 	translate([outerWidth/2 - depth/2*tan(30), 0, height/2]) {
 		rotate(-30) {
 			translate([bobbleOffset*depth/(bobbleRatio),0,0]) {
@@ -94,3 +97,4 @@ translate([0, depth/6, height/2+fiddle]) {
 			}
 		}
 	}
+}
