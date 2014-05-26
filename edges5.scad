@@ -1,5 +1,5 @@
 dietMode = false;
-atkinsMode = true;
+atkinsMode = false;
 hexagonWidth = (213.2 + 0.4)/6; /*106.6*2; 213.2; 35.5*/
 fiddle = 0.2;
 depth = 30;
@@ -7,7 +7,7 @@ height = (atkinsMode ? 4 : 6);
 seaHeight = 1.5;
 
 // Image stuff
-dataFile = "./edgepicTEST1.dat";
+dataFile = "./edgepicFINAL.dat";
 imageWidth = 1240;
 embossDepth = (atkinsMode ? 0.8 : 0.5);
 
